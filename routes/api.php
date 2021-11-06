@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //API test
 Route::get('/products/list',[ProductController::class,'APIList']);
+Route::post('/products/list',[ProductController::class,'APIPost']);
+// Route::any('/products/list',[ProductController::class,'APIList']);
+

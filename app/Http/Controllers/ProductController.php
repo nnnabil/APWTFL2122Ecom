@@ -75,4 +75,14 @@ class ProductController extends Controller
     public function APIList(){
         return Product::all();
     }
+    public function APIPost(Request $req){
+        $product = new Product();
+        $product->id = $req->id;
+        $product->name = $req->name;
+        $product->price = $req->price;
+        $product->image = $req->image;
+        $product->save();
+
+        return $req;
+    }
 }
