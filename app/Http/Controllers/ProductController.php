@@ -25,11 +25,11 @@ class ProductController extends Controller
         if(session()->has('cart')){
             $cart = json_decode(session()->get('cart'));
         }
-        $product = array('id'=>$id,'qty'=>1,'name'=>$p->name,'price'=>$p->price,'image'=>$p->image);
+        $product = array('id'=>$id,'qty'=>2,'name'=>$p->name,'price'=>$p->price,'image'=>$p->image);
         $cart[] = (object)($product);
         $jsonCart = json_encode($cart);
         session()->put('cart',$jsonCart);
-        // return session()->get('cart');
+        //return session()->get('cart');
         return redirect()->route('products.list');
     }
     public function emptycart(){
@@ -68,8 +68,11 @@ class ProductController extends Controller
 
         session()->forget('cart');
 
-        return "Pruchase Done!";
+        return "Added to db";
         
 
+    }
+    public function APIList(){
+        return Product::all();
     }
 }

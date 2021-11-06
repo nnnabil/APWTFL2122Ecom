@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 
@@ -17,6 +17,10 @@ class LoginController extends Controller
                   ->first();
         if($c){
             session()->put('user',$c->phone);
+            if ($req->remember) {
+                setcookie('remember',$req->phone, time()+36000);
+                Cookie::queue('name',$c->phone."asdf",time()+60);
+            }
             return redirect()->route('products.mycart');
         }
         return redirect()->route('login');
@@ -25,5 +29,23 @@ class LoginController extends Controller
     public function logout(){
         session()->flush();
         return redirect()->route('login');
+    }
+    public function test_file(){
+
+        return view('testfile');
+    }
+    public function upload(Request $request){
+        $request->validate(
+            [
+                'image'=> 'required|mimes:jpg,png,pdf,docx,xlsx,xlx|max:2048'
+            ]
+        );
+        if($request->hasFile('image')){
+            //return $request->file('image')->getClientOriginalName();
+            $name = time()."_".$request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('uploads',$name,'public');
+            return "Upload successfull";
+        }
+        return "No file";
     }
 }
