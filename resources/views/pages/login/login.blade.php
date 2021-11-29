@@ -16,9 +16,9 @@
 					<form action="{{route('login')}}" method="post" class="login-form">
 						{{@csrf_field()}}
 					<div class="form-group">
-					<input type="text" class="form-control rounded-left" name="phone" <?php if(isset($_COOKIE['remember'])) {echo $_COOKIE['remember'];} ?> placeholder="Username" required>
+					<input type="text" class="form-control rounded-left" name="phone" <?php if(isset($_COOKIE['remember'])) {echo $_COOKIE['remember'];} ?> value = "<?php if(isset($_COOKIE['remember'])) {echo $_COOKIE['remember'];} ?>" placeholder="Phonenumber" required>
 				</div>
-				<span><?php if(isset($_COOKIE['remember'])) {echo $_COOKIE['remember'];} ?><br>
+				<span><br>
 						{{Cookie::get('name')}}
 				</span>
 			<div class="form-group d-flex">

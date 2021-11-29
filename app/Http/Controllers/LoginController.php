@@ -19,7 +19,7 @@ class LoginController extends Controller
             session()->put('user',$c->phone);
             if ($req->remember) {
                 setcookie('remember',$req->phone, time()+36000);
-                Cookie::queue('name',$c->phone."asdf",time()+60);
+                Cookie::queue('name',$c->phone."abc",time()+60);
             }
             return redirect()->route('products.mycart');
         }

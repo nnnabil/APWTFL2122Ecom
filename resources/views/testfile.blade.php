@@ -7,5 +7,3 @@
     @enderror
 
 </form>
-
-<img width="300px" height="350px" src="{{asset('storage/uploads/1634624822_abhijit_bhowmik.jpg')}}">

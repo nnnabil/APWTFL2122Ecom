@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductAPIController;
+use App\Http\Controllers\LoginAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,7 @@ use App\Http\Controllers\ProductController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/product/list',[ProductAPIController::class,'list'])->middleware('APIAuth');
+Route::post('/product/add',[ProductAPIController::class,'add']);
 
-//API test
-Route::get('/products/list',[ProductController::class,'APIList']);
-Route::post('/products/list',[ProductController::class,'APIPost']);
-// Route::any('/products/list',[ProductController::class,'APIList']);
-
+Route::post('/login',[LoginAPIController::class,'login']);
