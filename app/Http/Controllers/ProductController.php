@@ -25,7 +25,7 @@ class ProductController extends Controller
         if(session()->has('cart')){
             $cart = json_decode(session()->get('cart'));
         }
-        $product = array('id'=>$id,'qty'=>2,'name'=>$p->name,'price'=>$p->price,'image'=>$p->image);
+        $product = array('id'=>$id,'qty'=>1,'name'=>$p->name,'price'=>$p->price,'image'=>$p->image);
         $cart[] = (object)($product);
         $jsonCart = json_encode($cart);
         session()->put('cart',$jsonCart);
@@ -59,7 +59,7 @@ class ProductController extends Controller
         //creating order details
         foreach($products as $p){
             $o_d = new Orderdetail();
-            $o_d->order_id = $order->id;
+            $o_d->o_id = $order->id;
             $o_d->product_id = $p->id;
             $o_d->qty = $p->qty;
             $o_d->unit_price = $p->price;
@@ -72,6 +72,35 @@ class ProductController extends Controller
         
 
     }
+
+    public function addProduct(){
+        return view('pages.product.add');
+    }
+
+    public function addProductSubmit(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $p = new Product();
+        $p->name=$request->name;
+        $p->price=$request->price;
+    
+        if($request->hasFile('image')){
+            $imageName = time()."_".$request->file('image')->getClientOriginalName();
+            // return $imageName;
+            $request->image->move(public_path('images'), $imageName);
+            $p->image=$imageName;
+            $p->save();
+            return redirect(route('products.list'));
+        }
+        
+        /* Store $imageName name in DATABASE from HERE */
+        return "No file";
+    }
+
+
+
     // public function APIList(){
     //     return Product::all();
     // }

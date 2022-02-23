@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 08:23 AM
+-- Generation Time: Feb 23, 2022 at 08:40 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `customers` (
+  `id` int(11) DEFAULT NULL,
   `phone` varchar(20) NOT NULL,
   `name` varchar(50) NOT NULL,
   `password` varchar(32) NOT NULL
@@ -37,8 +38,8 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`phone`, `name`, `password`) VALUES
-('123456', 'Mr. X', '81dc9bdb52d04dc20036dbd8313ed055');
+INSERT INTO `customers` (`id`, `phone`, `name`, `password`) VALUES
+(1, '123456', 'Mr. X', '1234');
 
 -- --------------------------------------------------------
 
@@ -59,12 +60,8 @@ CREATE TABLE `orderdetails` (
 --
 
 INSERT INTO `orderdetails` (`id`, `o_id`, `product_id`, `qty`, `unit_price`) VALUES
-(1, 1, 1, 2, 85000),
-(2, 1, 2, 2, 34000),
-(3, 2, 1, 2, 85000),
-(4, 2, 2, 2, 34000),
-(5, 3, 1, 2, 85000),
-(6, 3, 2, 2, 34000);
+(1, 1, 1, 1, 12000),
+(2, 1, 2, 1, 60000);
 
 -- --------------------------------------------------------
 
@@ -84,9 +81,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer_id`, `status`, `price`) VALUES
-(1, '123456', 'Ordered', 238000),
-(2, '123456', 'Ordered', 238000),
-(3, '123456', 'Ordered', 238000);
+(1, '123456', 'Ordered', 72000);
 
 -- --------------------------------------------------------
 
@@ -106,10 +101,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `image`) VALUES
-(1, 'I Phone 12 mini', 85000, 'https://priceinall.com/wp-content/uploads/2021/04/Apple-iphone13-mini.jpg'),
-(2, 'I Phone 6s', 34000, 'https://d16lwq5o0fvd7.cloudfront.net/images/catalogue/products/mn0w2ba/mn0w2ba_1.jpg'),
-(3, 'Mac Book', 120000, 'demoinga'),
-(4, 'HP Probbok', 12343, 'image.jpg');
+(1, 'Macbook', 12000, '1645601733_MacBook.jpg'),
+(2, 'I Phone 12', 60000, '1645601754_IPhone12.jpg');
 
 -- --------------------------------------------------------
 
@@ -131,11 +124,12 @@ CREATE TABLE `tokens` (
 
 INSERT INTO `tokens` (`id`, `userid`, `token`, `created_at`, `expired_at`) VALUES
 (1, 1, 'dcPnGBfN6KpOkFFTzGKAkmgBy8r6aMXltokigcbKOx77vn2z5qNDJAonFBFMMMV0', '2021-11-28 06:56:27', '2021-11-28 13:22:04'),
-(2, 1, 'hzevmdyuhjJJBks4ScPNx18GI345OMn7Bo0nl2kyaHdVlTFBFfY5ly3WFm3YUvYX', '2021-11-28 07:22:51', '2021-11-28 15:30:10'),
 (3, 1, 'GoNogn7peCqBUlGfNYF7kN3vKyn0UjYBPgv2QMEqI2WpyVbCf44OnP7X1hj1Bq76', '2021-11-28 09:20:08', '2021-11-28 15:30:15'),
-(4, 1, 'Mlgq26sk8BbgaijZWaP169ApBrtdwHnkx2B4crlHUBHzYpLT7ZO0pdmGRo9AEYFH', '2021-11-28 09:21:27', '2021-11-29 12:48:58'),
 (5, 1, 'BYefJhiAy34dbmmzlRYvfu56xOKy1yaSP6odQBUQ3ARUJYcRs6vGN4ss3TY2hq0w', '2021-11-28 09:29:53', '2021-11-29 12:49:05'),
-(7, 1, 'F5yXbmURGA9r9LEwvlClFyQkbARA2sDV8hBqU3eUwNOStNPdVkfPdVlNpyu9ahku', '2021-11-29 07:10:54', NULL);
+(7, 1, 'F5yXbmURGA9r9LEwvlClFyQkbARA2sDV8hBqU3eUwNOStNPdVkfPdVlNpyu9ahku', '2021-11-29 07:10:54', '2021-11-29 13:51:38'),
+(12, 1, 'nelflfELW4nmVk3RnE5QSc8CTHWbIqbXzwKMpHyxZyZBOVMEuz53kznP7AaUQudQ', '2021-11-30 12:49:35', '2021-11-30 18:57:19'),
+(17, 1, 'gtv5GzNSKdyjYG37A0Bw6aSBgrbKpTVblswwM9g7Pgay12p9WIeGjW6m87OBfHFb', '2021-12-01 06:14:29', '2021-12-01 12:42:02'),
+(19, 1, 'q5oFz8cCSGsStOBp3rTwQibrQlSszuxF8ild9LgMKla5PcmxF5aA6ALeiBEgh2co', '2021-12-01 06:43:19', '2021-12-01 12:44:52');
 
 -- --------------------------------------------------------
 
@@ -206,25 +200,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`

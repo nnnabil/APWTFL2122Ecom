@@ -28,12 +28,12 @@ Route::get('/addtocart/{id}',[ProductController::class,'addtocart'])->name('prod
 Route::get('/emptycart',[ProductController::class,'emptycart'])->name('products.emptycart');
 Route::get('/cart',[ProductController::class,'mycart'])->name('products.mycart');
 Route::post('/checkout',[ProductController::class,'checkout'])->middleware('LoggedInCustomer')->name('checkout');
+// Add Product
+Route::get('/addProduct',[ProductController::class,'addProduct'])->name('addProduct');
+Route::post('/addProduct',[ProductController::class,'addProductSubmit'])->name('addProduct');
 /**product routes end */
        
 Route::get('/customer/myorders',[CustomerController::class,'myorders'])
 ->middleware('LoggedInCustomer')->name('customer.myorders');
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 Route::get('/customer/myorders/details/{id}',[CustomerController::class,'orderdetails'])->middleware('LoggedInCustomer')->name('customer.myorders.details');
-
-Route::get('/file',[LoginController::class,'test_file']);
-Route::post('/upload',[LoginController::class,'upload'])->name('upload');
