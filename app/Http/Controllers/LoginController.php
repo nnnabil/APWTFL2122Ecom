@@ -16,7 +16,7 @@ class LoginController extends Controller
                   ->where('password',$req->password)
                   ->first();
         if($c){
-            session()->put('user',$c->phone);
+            session()->put('user',$c->id);
             if ($req->remember) {
                 setcookie('remember',$req->phone, time()+36000);
                 Cookie::queue('name',$c->phone."This is for testing",time()+60);

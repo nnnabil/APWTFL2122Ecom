@@ -37,3 +37,7 @@ Route::get('/customer/myorders',[CustomerController::class,'myorders'])
 ->middleware('LoggedInCustomer')->name('customer.myorders');
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 Route::get('/customer/myorders/details/{id}',[CustomerController::class,'orderdetails'])->middleware('LoggedInCustomer')->name('customer.myorders.details');
+
+//customer edit
+Route::get('/customer/profile',[CustomerController::class,'profile'])->middleware('LoggedInCustomer')->name('profile');
+Route::post('/customer/profile',[CustomerController::class,'profileSubmit'])->middleware('LoggedInCustomer')->name('profileSubmit');
