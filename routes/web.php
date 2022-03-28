@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,5 @@ Route::get('/customer/myorders/details/{id}',[CustomerController::class,'orderde
 //customer edit
 Route::get('/customer/profile',[CustomerController::class,'profile'])->middleware('LoggedInCustomer')->name('profile');
 Route::post('/customer/profile',[CustomerController::class,'profileSubmit'])->middleware('LoggedInCustomer')->name('profileSubmit');
+
+Route::get('my-demo-mail', [HomeController::class, 'myDemoMail']);
