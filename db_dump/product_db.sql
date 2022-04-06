@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2022 at 08:40 AM
+-- Generation Time: Apr 06, 2022 at 06:11 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -39,7 +39,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `phone`, `name`, `password`) VALUES
-(1, '123456', 'Mr. X', '1234');
+(1, '1234', 'Mr. X', '1234');
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,13 @@ CREATE TABLE `orderdetails` (
 
 INSERT INTO `orderdetails` (`id`, `o_id`, `product_id`, `qty`, `unit_price`) VALUES
 (1, 1, 1, 1, 12000),
-(2, 1, 2, 1, 60000);
+(2, 1, 2, 1, 60000),
+(3, 2, 1, 1, 12000),
+(4, 2, 2, 1, 60000),
+(5, 3, 3, 1, 120000),
+(6, 4, 1, 1, 12000),
+(7, 4, 2, 1, 60000),
+(8, 4, 3, 1, 120000);
 
 -- --------------------------------------------------------
 
@@ -81,7 +87,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer_id`, `status`, `price`) VALUES
-(1, '123456', 'Ordered', 72000);
+(1, '123456', 'Ordered', 72000),
+(2, '123456', 'Ordered', 72000),
+(3, '123456', 'Ordered', 120000),
+(4, '123456', 'Ordered', 192000);
 
 -- --------------------------------------------------------
 
@@ -101,8 +110,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `image`) VALUES
-(1, 'Macbook', 12000, '1645601733_MacBook.jpg'),
-(2, 'I Phone 12', 60000, '1645601754_IPhone12.jpg');
+(1, 'Macbook', 12000, 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg'),
+(2, 'I Phone 12', 60000, '1645601754_IPhone12.jpg'),
+(3, 'iMac', 120000, '1646016458_download.jpg'),
+(4, 'New I Phone 12', 100, 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg');
 
 -- --------------------------------------------------------
 
@@ -117,19 +128,6 @@ CREATE TABLE `tokens` (
   `created_at` datetime NOT NULL,
   `expired_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tokens`
---
-
-INSERT INTO `tokens` (`id`, `userid`, `token`, `created_at`, `expired_at`) VALUES
-(1, 1, 'dcPnGBfN6KpOkFFTzGKAkmgBy8r6aMXltokigcbKOx77vn2z5qNDJAonFBFMMMV0', '2021-11-28 06:56:27', '2021-11-28 13:22:04'),
-(3, 1, 'GoNogn7peCqBUlGfNYF7kN3vKyn0UjYBPgv2QMEqI2WpyVbCf44OnP7X1hj1Bq76', '2021-11-28 09:20:08', '2021-11-28 15:30:15'),
-(5, 1, 'BYefJhiAy34dbmmzlRYvfu56xOKy1yaSP6odQBUQ3ARUJYcRs6vGN4ss3TY2hq0w', '2021-11-28 09:29:53', '2021-11-29 12:49:05'),
-(7, 1, 'F5yXbmURGA9r9LEwvlClFyQkbARA2sDV8hBqU3eUwNOStNPdVkfPdVlNpyu9ahku', '2021-11-29 07:10:54', '2021-11-29 13:51:38'),
-(12, 1, 'nelflfELW4nmVk3RnE5QSc8CTHWbIqbXzwKMpHyxZyZBOVMEuz53kznP7AaUQudQ', '2021-11-30 12:49:35', '2021-11-30 18:57:19'),
-(17, 1, 'gtv5GzNSKdyjYG37A0Bw6aSBgrbKpTVblswwM9g7Pgay12p9WIeGjW6m87OBfHFb', '2021-12-01 06:14:29', '2021-12-01 12:42:02'),
-(19, 1, 'q5oFz8cCSGsStOBp3rTwQibrQlSszuxF8ild9LgMKla5PcmxF5aA6ALeiBEgh2co', '2021-12-01 06:43:19', '2021-12-01 12:44:52');
 
 -- --------------------------------------------------------
 
@@ -149,7 +147,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `type`) VALUES
-(1, 'user', '1234', 'Admin'),
+(1, '1234', '1234', 'Admin'),
 (2, 'user1', '1234', 'User');
 
 --
@@ -200,25 +198,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
